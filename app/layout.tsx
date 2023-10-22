@@ -31,7 +31,7 @@ export default function RootLayout({
             <Header />
             <div className="flex-1 flex flex-col">
               {children}
-              <Footer page="home" />
+              <Footer />
             </div>
           </ThemeProvider>
         </body>
