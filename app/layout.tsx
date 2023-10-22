@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import { ThemeProvider } from "./components/ThemeProvider";
 import ClientProviders from "./components/ClientProviders";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
   return (
     <ClientProviders>
       <html lang="en">
-        <body className={inter.className}>
+        <body className="font-inter flex flex-col min-h-screen dark:bg-gray-900">
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -28,7 +29,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Header />
-            {children}
+            <div className="flex-1 flex flex-col">
+              {children}
+              <Footer page="home" />
+            </div>
           </ThemeProvider>
         </body>
       </html>

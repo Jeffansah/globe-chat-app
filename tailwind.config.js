@@ -72,6 +72,7 @@ module.exports = {
       },
       fontFamily: {
         urbanist: ["Urbanist", "sans-serif"],
+        inter: ["Inter", "sans-serif"],
       },
     },
   },
