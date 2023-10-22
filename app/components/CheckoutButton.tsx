@@ -1,19 +1,47 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
+import { db } from "@/firebase";
+import { addDoc, collection, onSnapshot } from "firebase/firestore";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 const CheckoutButton = () => {
   const { data: session } = useSession();
+  const [loading, setLoading] = useState(false);
 
   const createCheckoutSession = async () => {
-    if (!session) {
-      signOut();
+    if (!session?.user.id) {
       return;
     }
 
     //push a document to firestore db
 
+    setLoading(true);
+
+    const docRef = await addDoc(
+      collection(db, "customers", session.user.id, "checkout_sessions"),
+      {
+        price: "price_1O3w1KBThwrHqyQN9B776vdz",
+        success_url: window.location.origin,
+        cancel_url: window.location.origin,
+      }
+    );
+
     //stripe extension on fb will will create a checkout sesion
+    return onSnapshot(docRef, (snap) => {
+      const data = snap.data();
+      const url = data?.url;
+      const error = data?.error;
+
+      if (error) {
+        alert(`An error occured: ${error.message}`);
+        setLoading(false);
+      }
+      if (url) {
+        window.location.assign(url);
+        setLoading(false);
+      }
+    });
 
     //redirect user to checkout page
   };
@@ -21,10 +49,10 @@ const CheckoutButton = () => {
   return (
     <div className="flex flex-col gap-y-2">
       <button
-        onClick={() => createCheckoutSession}
+        onClick={() => createCheckoutSession()}
         className="mt-8 rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible::outline-indigo-600 cursor-pointer disabled:opacity-80"
       >
-        Subscribe
+        {loading ? "loading..." : "Subscribe"}
       </button>
     </div>
   );
