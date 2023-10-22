@@ -27,7 +27,7 @@ const FirebaseAuthProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("firebase:" + session);
 
     syncFirebaseAuth(session);
-  });
+  }, [session]);
 
   return <div>{children}</div>;
 };
