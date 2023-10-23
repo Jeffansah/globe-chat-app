@@ -11,6 +11,7 @@ const SubscriptionProvider = ({ children }: { children: React.ReactNode }) => {
   const setSubscription = useSubscriptionStore(
     (state) => state.setSubscription
   );
+  const setIsLoading = useSubscriptionStore((state) => state.setIsLoading);
 
   useEffect(() => {
     if (!session) return;
@@ -20,6 +21,7 @@ const SubscriptionProvider = ({ children }: { children: React.ReactNode }) => {
       (snapshot) => {
         if (snapshot.empty) {
           console.log("No matching document. User has no subscription");
+          setIsLoading(false);
           return;
         } else {
           console.log("User subscription found!");

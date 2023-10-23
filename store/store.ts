@@ -94,11 +94,15 @@ export const LanguagesSupportedMap: Record<LanguagesSupported, string> = {
 };
 
 interface SubscriptionState {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
   subscription: Subscription | null | undefined;
   setSubscription: (subscription: Subscription | null) => void;
 }
 
 export const useSubscriptionStore = create<SubscriptionState>((set) => ({
+  isLoading: true,
+  setIsLoading: (isLoading: boolean) => set({ isLoading }),
   subscription: null,
   setSubscription: (subscription: Subscription | null) => set({ subscription }),
 }));

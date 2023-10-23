@@ -1,6 +1,7 @@
 import { CheckCircleIcon, CheckIcon } from "lucide-react";
 import Link from "next/link";
 import CheckoutButton from "./CheckoutButton";
+import ActiveBadge from "./ActiveBadge";
 
 const tiers = [
   {
@@ -35,7 +36,7 @@ const tiers = [
   },
 ];
 
-const PricingCards = ({ redirect }: { redirect: boolean }) => {
+const PricingCards = async ({ redirect }: { redirect: boolean }) => {
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-2 mx-auto gap-8 max-lg:max-w-md max-w-2xl">
@@ -43,12 +44,16 @@ const PricingCards = ({ redirect }: { redirect: boolean }) => {
           <div key={tier.id}>
             <div className="flex flex-col justify-between rounded-3xl bg-white p-8 shadow-xl ring-1 ring-gray-900/10 sm:p-10  lg:min-h-[690px]">
               <div className="flex-grow">
-                <h3
-                  id={tier.id + tier.name}
-                  className="text-base font-semibold leading-7 text-indigo-600"
-                >
-                  {tier.name}
-                </h3>
+                <div className="flex justify-between">
+                  <h3
+                    id={tier.id + tier.name}
+                    className="text-base font-semibold leading-7 text-indigo-600"
+                  >
+                    {tier.name}
+                  </h3>
+                  <ActiveBadge id={tier.id} />
+                </div>
+
                 <div className="mt-4 flex- items-baseline gap-x-2">
                   {tier.priceMonthly ? (
                     <>
