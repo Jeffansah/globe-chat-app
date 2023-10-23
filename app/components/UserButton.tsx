@@ -16,6 +16,7 @@ import { useSubscriptionStore } from "@/store/store";
 import CircularProgress from "@mui/joy/CircularProgress/CircularProgress";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
+import ManageAccountBtn from "./ManageAccountBtn";
 
 const UserButton = ({ session }: { session: Session | null }) => {
   const subscription = useSubscriptionStore((state) => state.subscription);
@@ -50,8 +51,7 @@ const UserButton = ({ session }: { session: Session | null }) => {
           subscription?.items[0]?.plan?.metadata?.role === "pro" && (
             <>
               <DropdownMenuItem>
-                Manage
-                {/* Manage Account Button goes here */}
+                <ManageAccountBtn />
               </DropdownMenuItem>
             </>
           )

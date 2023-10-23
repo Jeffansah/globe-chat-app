@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import CircularProgress from "@mui/joy/CircularProgress";
 import { Button } from "@/components/ui/button";
 import { useSubscriptionStore } from "@/store/store";
+import ManageAccountBtn from "./ManageAccountBtn";
 
 const CheckoutButton = () => {
   const { data: session } = useSession();
@@ -62,16 +63,10 @@ const CheckoutButton = () => {
         </button>
       ) : subscription?.items[0]?.plan?.active &&
         subscription?.items[0]?.plan?.metadata?.role === "pro" ? (
-        <Button
-          onClick={() => createCheckoutSession()}
-          className="mt-8 rounded-md bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible::outline-indigo-600 cursor-pointer disabled:opacity-80"
-        >
-          {loading ? (
-            <CircularProgress variant="soft" size="sm" className="w-4 h-4" />
-          ) : (
-            "Manage subscription"
-          )}
-        </Button>
+        <ManageAccountBtn
+          loading={loading}
+          classes="mt-8 rounded-md w-full bg-indigo-600 px-3.5 py-2 text-center text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible::outline-indigo-600 cursor-pointer disabled:opacity-80"
+        />
       ) : (
         <button
           onClick={() => createCheckoutSession()}
