@@ -7,6 +7,7 @@ import ClientProviders from "./components/ClientProviders";
 import Footer from "./components/Footer";
 import FirebaseAuthProvider from "./components/FirebaseAuthProvider";
 import SubscriptionProvider from "./components/SubscriptionProvider";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ export default function RootLayout({
                 enableSystem
                 disableTransitionOnChange
               >
+                <NextTopLoader color="#4f46e5" />
                 <Header />
                 <div className="flex-1 flex flex-col">
                   {children}
