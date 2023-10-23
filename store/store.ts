@@ -93,6 +93,36 @@ export const LanguagesSupportedMap: Record<LanguagesSupported, string> = {
   zu: "Zulu",
 };
 
+const FREE_LANGUAGES_NUMBER = 2;
+
+interface LanguageState {
+  language: LanguagesSupported;
+  setLanguage: (language: LanguagesSupported) => void;
+  getLanguages: (isPro: boolean) => LanguagesSupported[];
+  getNotSupportedLanguages: (isPro: boolean) => LanguagesSupported[];
+}
+
+export const useLanguageStore = create<LanguageState>((set, get) => ({
+  language: "en",
+  setLanguage: (language: LanguagesSupported) => set({ language }),
+  getLanguages: (isPro: boolean) => {
+    if (isPro)
+      return Object.keys(LanguagesSupportedMap) as LanguagesSupported[];
+
+    return Object.keys(LanguagesSupportedMap).slice(
+      0,
+      FREE_LANGUAGES_NUMBER
+    ) as LanguagesSupported[];
+  },
+  getNotSupportedLanguages: (isPro: boolean) => {
+    if (isPro) return [];
+
+    return Object.keys(LanguagesSupportedMap).slice(
+      FREE_LANGUAGES_NUMBER
+    ) as LanguagesSupported[];
+  },
+}));
+
 interface SubscriptionState {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
