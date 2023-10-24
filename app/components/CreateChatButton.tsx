@@ -1,11 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
-import { addChatRef } from "@/lib/converters/chatconvertor";
+import {
+  addChatRef,
+  chatMembersCollectionGroupRef,
+} from "@/lib/converters/chatconvertor";
 import { useSubscriptionStore } from "@/store/store";
 import CircularProgress from "@mui/joy/CircularProgress/CircularProgress";
-import { serverTimestamp, setDoc } from "firebase/firestore";
+import { getDocs, serverTimestamp, setDoc } from "firebase/firestore";
 import { MessageSquarePlusIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -16,7 +20,7 @@ const CreateChatButton = ({ isLarge }: { isLarge?: boolean }) => {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  const subscription = useSubscriptionStore();
+  const subscription = useSubscriptionStore((state) => state.subscription);
   const router = useRouter();
 
   const createNewChat = async () => {
@@ -38,6 +42,35 @@ const CreateChatButton = ({ isLarge }: { isLarge?: boolean }) => {
     });
 
     //TODO check if user is pro and limit then creating a new chat
+    const noOfChats = (
+      await getDocs(chatMembersCollectionGroupRef(session.user.id))
+    ).docs.map((doc) => doc.data()).length;
+
+    const isPro =
+      subscription?.items[0]?.plan?.metadata?.role === "pro" &&
+      subscription?.status === "active";
+
+    if (!isPro && noOfChats >= 3) {
+      toast({
+        title: "Free plan limit exceeded",
+        description:
+          "You've exceeded the limit of chats for the FREE plan. Please upgrade to PRO to continue creating more chats!",
+        variant: "destructive",
+
+        action: (
+          <ToastAction
+            altText="Upgrade"
+            onClick={() => router.push("/register")}
+          >
+            Upgrade to PRO
+          </ToastAction>
+        ),
+      });
+
+      setLoading(false);
+
+      return;
+    }
 
     const chatId = uuidv4();
 

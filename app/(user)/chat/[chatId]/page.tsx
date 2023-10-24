@@ -1,3 +1,4 @@
+import AdminControls from "@/app/components/AdminControls";
 import ChatInput from "@/app/components/ChatInput";
 import ChatMembersBadges from "@/app/components/ChatMembersBadges";
 import ChatMessages from "@/app/components/ChatMessages";
@@ -21,7 +22,7 @@ const page = async ({ params: { chatId } }: Props) => {
 
   return (
     <>
-      {/* Admin controls */}
+      <AdminControls chatId={chatId} />
 
       <ChatMembersBadges chatId={chatId} />
 
@@ -33,7 +34,6 @@ const page = async ({ params: { chatId } }: Props) => {
         />
       </div>
 
-      {/* Chat Input */}
       <ChatInput chatId={chatId} />
     </>
   );

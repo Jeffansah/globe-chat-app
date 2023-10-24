@@ -17,6 +17,7 @@ import { useSubscriptionStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import ExitChat from "./ExitChat";
 
 const formSchema = z.object({
   input: z.string().max(1000),
@@ -89,11 +90,11 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
   };
 
   return (
-    <div className="sticky bottom-0 mb-4 max-sm:px-4">
+    <div className="sticky bottom-0 mb-4 max-sm:px-4 flex items-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex space-x-2 p-2 rounded-xl max-w-4xl mx-auto bg-white border dark:bg-slate-800"
+          className="flex flex-1 w-full space-x-2 p-2 rounded-xl max-w-4xl mx-auto bg-white border dark:bg-slate-800"
         >
           <FormField
             control={form.control}
@@ -112,12 +113,13 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
           />
           <Button
             type="submit"
-            className="bg-violet-600 text-white dark:hover:text-black/80"
+            className="bg-indigo-600 text-white dark:hover:text-black/80"
           >
             Send
           </Button>
         </form>
       </Form>
+      <ExitChat chatId={chatId} />
     </div>
   );
 };
