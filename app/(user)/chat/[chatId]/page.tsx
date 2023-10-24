@@ -1,4 +1,5 @@
 import ChatInput from "@/app/components/ChatInput";
+import ChatMembersBadges from "@/app/components/ChatMembersBadges";
 import ChatMessages from "@/app/components/ChatMessages";
 import { authOptions } from "@/auth";
 import { sortedMessagesRef } from "@/lib/converters/messagesconverter";
@@ -22,7 +23,7 @@ const page = async ({ params: { chatId } }: Props) => {
     <>
       {/* Admin controls */}
 
-      {/* Chat Members Badge */}
+      <ChatMembersBadges chatId={chatId} />
 
       <div className="flex-1">
         <ChatMessages

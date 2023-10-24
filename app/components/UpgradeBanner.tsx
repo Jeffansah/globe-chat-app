@@ -9,8 +9,6 @@ const UpgradeBanner = () => {
   const role: string | null | undefined =
     subscription?.items[0]?.plan?.metadata?.role;
 
-  console.log(subscription);
-
   const router = useRouter();
 
   return (

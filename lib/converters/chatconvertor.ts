@@ -20,7 +20,7 @@ export interface ChatMembers {
   image: string;
 }
 
-const chatMembersConverter: FirestoreDataConverter<ChatMembers> = {
+export const chatMembersConverter: FirestoreDataConverter<ChatMembers> = {
   toFirestore: (member: ChatMembers): DocumentData => {
     return {
       userId: member.userId,
@@ -53,12 +53,12 @@ export const addChatRef = (chatId: string, userId: string) =>
     chatMembersConverter
   );
 
-export const addMembersRef = (chatId: string) =>
+export const chatMembersRef = (chatId: string) =>
   collection(db, "chats", chatId, "members").withConverter(
     chatMembersConverter
   );
 
-export const addMemberAdminRef = (chatId: string) =>
+export const chatMemberAdminRef = (chatId: string) =>
   query(
     collection(db, "chats", chatId, "members"),
     where("isAdmin", "==", true)
