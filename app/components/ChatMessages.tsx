@@ -52,16 +52,28 @@ const ChatMessages = ({
         const isSender = message.user.id === session?.user.id;
 
         return (
-          <div className="flex my-2 items-end" key={message.id}>
+          <div className="flex relative my-2 items-end" key={message.id}>
+            <UserAvatar
+              name={message.user.name}
+              image={message.user.image}
+              className={`${isSender && "-order-1 hidden"}`}
+            />
+            <p
+              className={`${
+                isSender ? "text-right" : "hidden"
+              } text-[11px] text-gray-500/70 dark:text-gray-500/60 w-full px-3 mb-1`}
+            >
+              {message?.timestamp?.toLocaleTimeString() || ""}
+            </p>
             <div
               className={`flex flex-col relative space-y-2 p-4 w-fit line-clamp-1 mx-2 rounded-lg ${
                 isSender
                   ? "ml-auto bg-indigo-600 text-white rounded-br-none"
-                  : "bg-gray-100 dark:text-gray-100 dark:bg-slate-700 rounded-bl-none"
+                  : "bg-gray-100 dark:text-gray-100 dark:bg-slate-700 rounded-bl-none mr-auto"
               }`}
             >
               <p
-                className={`text-gray-200 text-xs italic font-extralight line-clamp-1 ${
+                className={`text-gray-300 dark:text-gray-200 text-xs italic font-extralight line-clamp-1 ${
                   isSender ? "text-right" : "text-left"
                 }`}
               >
@@ -79,8 +91,15 @@ const ChatMessages = ({
             <UserAvatar
               name={message.user.name}
               image={message.user.image}
-              className={`${isSender && "-order-1"}`}
+              className={`${isSender ? "-order-1" : "hidden"}`}
             />
+            <p
+              className={`${
+                isSender ? "hidden" : "text-left"
+              } text-[11px] text-gray-500/70 dark:text-gray-500/60 w-full px-3 mb-1`}
+            >
+              {message?.timestamp?.toLocaleTimeString() || ""}
+            </p>
           </div>
         );
       })}

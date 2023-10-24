@@ -26,7 +26,7 @@ const ChatListRow = ({ chatId }: { chatId: string }) => {
     <div
       key={chatId}
       onClick={() => router.push(`/chat/${chatId}`)}
-      className="flex p-5 items-center gap-x-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700"
+      className="flex p-5 items-center gap-x-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-slate-700 hover:rounded-md"
     >
       <UserAvatar
         name={message?.user.name || session?.user.name}

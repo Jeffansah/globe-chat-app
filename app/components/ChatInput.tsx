@@ -90,7 +90,7 @@ const ChatInput = ({ chatId }: { chatId: string }) => {
   };
 
   return (
-    <div className="sticky bottom-0 mb-4 max-sm:px-4 flex items-center">
+    <div className="sticky bottom-2 mb-4 max-sm:px-4 flex items-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

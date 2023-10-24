@@ -10,10 +10,10 @@ const ChatPermissionError = () => {
       <AlertTitle>Error</AlertTitle>
       <AlertDescription className="flex">
         <p className="flex-1">
-          Your session has expired. Please log in again.
+          You do not have access to this chat.
           <br />
           <span className="font-bold">
-            Please ask the chat admin to add you to the chat
+            Please ask the chat admin to add you to the chat.
           </span>
         </p>
         <Link href={"/chat"} replace>
