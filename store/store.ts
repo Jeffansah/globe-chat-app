@@ -8,12 +8,12 @@ export type LanguagesSupported =
   | "de"
   | "it"
   | "pt"
+  | "ar"
   | "zh"
   | "ja"
-  | "hi"
   | "ko"
   | "la"
-  | "ar"
+  | "hi"
   | "no"
   | "ru"
   | "sw"
@@ -29,12 +29,12 @@ export const LanguagesSupportedMap: Record<LanguagesSupported, string> = {
   de: "German",
   it: "Italian",
   pt: "Portuguese",
+  ar: "Arabic",
   zh: "Chinese",
   ja: "Japanese",
-  hi: "Hindi",
   ko: "Korean",
   la: "Latin",
-  ar: "Arabic",
+  hi: "Hindi",
   no: "Norwegian",
   ru: "Russian",
   sw: "Swahili",

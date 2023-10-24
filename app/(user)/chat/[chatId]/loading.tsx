@@ -1,10 +1,10 @@
-import CircularProgress from "@mui/joy/CircularProgress/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress/CircularProgress";
 import React from "react";
 
 const loading = () => {
   return (
-    <div className="w-full felx justify-center">
-      <CircularProgress variant="soft" size="md" />
+    <div className="w-full flex justify-center pt-5">
+      <CircularProgress sx={{ color: "#6B46C1 !important" }} />
     </div>
   );
 };
