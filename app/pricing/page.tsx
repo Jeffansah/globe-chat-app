@@ -1,5 +1,11 @@
+import { Metadata } from "next";
 import BackDrop from "../components/BackDrop";
 import PricingCards from "../components/PricingCards";
+
+export const metadata: Metadata = {
+  title: "Pricing",
+  description: "Pricing page",
+};
 
 const page = () => {
   return (

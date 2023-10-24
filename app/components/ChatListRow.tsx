@@ -33,7 +33,7 @@ const ChatListRow = ({ chatId }: { chatId: string }) => {
         image={message?.user.image || session?.user.image}
       />
       <div className="flex-1">
-        <p className="font-bold">
+        <p className="">
           {!message
             ? "New Chat"
             : [message?.user.name || session?.user.name]
