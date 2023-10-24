@@ -33,7 +33,7 @@ const SubscriptionProvider = ({ children }: { children: React.ReactNode }) => {
         console.log("error getting document: ", error);
       }
     );
-  }, [session, setSubscription]);
+  }, [session, setSubscription, setIsLoading]);
 
   return <>{children}</>;
 };
