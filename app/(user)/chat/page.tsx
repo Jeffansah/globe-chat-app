@@ -2,7 +2,7 @@ import ChatList from "@/app/components/ChatList";
 import ChatPermissionError from "@/app/components/ChatPermissionError";
 
 type Props = {
-  parmas: {};
+  params: {};
   searchParams: {
     error: string;
   };
