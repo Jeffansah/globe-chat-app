@@ -34,6 +34,9 @@ const ChatListRows = ({ initialChats }: { initialChats: ChatMembers[] }) => {
 
   return (
     <>
+      <p className="text-5xl py-4 mt-2 mb-3 font-bold border-b-[0.5px] border-gray-300/50 dark:border-gray-300/10">
+        Chats
+      </p>
       {members?.map((member, i) => (
         <ChatListRow key={member.chatId} chatId={member.chatId} />
       ))}

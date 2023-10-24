@@ -10,7 +10,6 @@ type Props = {
 const page = ({ searchParams: { error } }: Props) => {
   return (
     <div className="">
-      Chats
       {/* Chat Permission error */}
       <ChatList />
     </div>
