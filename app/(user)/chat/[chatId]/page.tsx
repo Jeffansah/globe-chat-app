@@ -3,9 +3,11 @@ import ChatInput from "@/app/components/ChatInput";
 import ChatMembersBadges from "@/app/components/ChatMembersBadges";
 import ChatMessages from "@/app/components/ChatMessages";
 import { authOptions } from "@/auth";
+import { chatMembersRef } from "@/lib/converters/chatconvertor";
 import { sortedMessagesRef } from "@/lib/converters/messagesconverter";
 import { getDocs } from "firebase/firestore";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: {
@@ -19,6 +21,12 @@ const page = async ({ params: { chatId } }: Props) => {
   const initialMessages = (await getDocs(sortedMessagesRef(chatId))).docs.map(
     (doc) => doc.data()
   );
+
+  const hasAccess = (await getDocs(chatMembersRef(chatId))).docs
+    .map((doc) => doc.id)
+    .includes(session?.user.id!);
+
+  if (!hasAccess) redirect("/chat?error=permission");
 
   return (
     <>
